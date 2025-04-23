@@ -6,7 +6,7 @@
 /*   By: moraouf <moraouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 14:16:19 by moraouf           #+#    #+#             */
-/*   Updated: 2025/04/22 14:11:14 by moraouf          ###   ########.fr       */
+/*   Updated: 2025/04/23 16:13:56 by moraouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ typedef struct s_data
 
 int	ft_atoi(const char *str);
 int check_data(char **av,int ac );
+void free_philo(t_philo **philo, int num);
+void init_data(int ac,char **av,t_data *data);
 
 
 #endif

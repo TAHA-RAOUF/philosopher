@@ -6,7 +6,7 @@
 /*   By: moraouf <moraouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 13:28:44 by moraouf           #+#    #+#             */
-/*   Updated: 2025/04/22 14:18:03 by moraouf          ###   ########.fr       */
+/*   Updated: 2025/04/23 16:10:06 by moraouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,20 +70,20 @@ int check_data(char **av,int ac )
     }
     if(!is_num(ac,av))
     {
-        printf("failed arg");
+        printf("Incorrect arg");
         return(0);
     }
     return 1;
 }
-void free_mem(char **array)
+void free_philo(t_philo **philo, int num)
 {
     int i;
 
     i = 0;
-    while(array[i])
+    while(i <num)
     {
-        free(array[i]);
+        free(philo[i]);
         i++;
     }
-    free(array);
+    free(philo);
 }
