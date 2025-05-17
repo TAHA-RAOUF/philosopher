@@ -6,24 +6,31 @@
 /*   By: moraouf <moraouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 14:15:50 by moraouf           #+#    #+#             */
-/*   Updated: 2025/04/23 16:12:48 by moraouf          ###   ########.fr       */
+/*   Updated: 2025/05/17 22:07:32 by moraouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 
+void	print_msg(char * str, t_philo *philo)
+{
+	pthread_mutex_lock(&philo->data->print);
+	printf("%s\n", str);
+	pthread_mutex_unlock(&philo->data->print);
+}
 
 //LOGIQUE OF PHILO PRO 
 void *routine(void *arg)
 {
-    t_philo *philo = (t_philo *)arg;
-
-    printf("The thread id : %d\n", philo->id_philo);
-    printf("The thread is eating\n");
-    printf("The thread is thinking\n");
-    printf("The thread is sleeping\n");
-
+    t_philo *philo;
+    
+    philo = (t_philo *)arg;
+    printf("the thread id is :%d\n",philo->id_philo);
+    //print_msg("The thread id : %d\n", philo);
+    print_msg("The thread %d is eating\n", philo);
+    print_msg("The thread %d is thinking\n", philo);
+    print_msg("The thread %d is sleeping\n", philo);
     return NULL;
 }
 
@@ -35,7 +42,7 @@ void join_philo(t_data *data)
 
     while(i < data->num_philo)
     {
-        pthread_join(data->philos[i]->thread,NULL);
+        pthread_join(data->philos[i].thread, NULL);
         i++;
     }
 }
@@ -46,23 +53,28 @@ void create_philo(t_data *data)
     int i = 0;
     while(i < data->num_philo)
     {
-        pthread_create(&data->philos[i]->thread, NULL, routine, data->philos[i]);
+        pthread_create(&data->philos[i].thread, NULL, routine, &data->philos[i]);
         i++;
     }
 }
 
-
-
 int main(int ac,char **av)
 {
-    t_data *data;
+    t_data data;
     
     if(!check_data(av,ac))
         return 1;
-    data = malloc(sizeof(t_data));
-    init_data(ac,av,data);
-    create_philo(data);
-    join_philo(data);
-    free_philo(data->philos,data->num_philo);   // FREE of all Falasifa 
-    free(data);
+    memset(&data,'0',sizeof(t_data));
+    //data = malloc(sizeof(t_data)); // replace with bzero HERE
+    init_data(ac, av, &data);
+    // int i = 0;
+    // while (i < data.num_philo)
+    // {
+    //     printf("hada tany %d\n", data.philos[i].id_philo);
+    //     i++;
+    // }
+    create_philo(&data);
+    join_philo(&data);
+    //free_philo(data->philos,data->num_philo);   // FREE of all Falasifa 
+    //free(data);
 }
