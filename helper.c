@@ -6,7 +6,7 @@
 /*   By: moraouf <moraouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 13:28:44 by moraouf           #+#    #+#             */
-/*   Updated: 2025/04/23 16:10:06 by moraouf          ###   ########.fr       */
+/*   Updated: 2025/05/18 15:05:20 by moraouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,14 @@ int is_num(int ac,char **av)
     return (1);
 }
 
+size_t get_current_time(void)
+{
+    struct timeval time;
+
+    if (gettimeofday(&time, NULL) == -1)
+        write(2, "error at the gettimeofday", 22);
+    return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+}
 int check_data(char **av,int ac )
 {
     if(ac != 5 && ac != 6)
@@ -74,16 +82,4 @@ int check_data(char **av,int ac )
         return(0);
     }
     return 1;
-}
-void free_philo(t_philo **philo, int num)
-{
-    int i;
-
-    i = 0;
-    while(i <num)
-    {
-        free(philo[i]);
-        i++;
-    }
-    free(philo);
 }

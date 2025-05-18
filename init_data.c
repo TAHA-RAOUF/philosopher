@@ -6,7 +6,7 @@
 /*   By: moraouf <moraouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:12:03 by moraouf           #+#    #+#             */
-/*   Updated: 2025/05/17 21:48:04 by moraouf          ###   ########.fr       */
+/*   Updated: 2025/05/18 15:13:19 by moraouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ t_philo *init_philo(t_data *data)
     int i;
     data->philos = malloc(sizeof(t_philo) * data->num_philo);
     if (!data->philos)
+        return(free(data->philos), NULL);
+    i = 0;
+    while(i < data->num_philo)
     {
-        return (NULL); // FREE HERE;
-        //free_philo(philo,data->num_philo);    
-    }
-    i = 1;
-    while(i <= data->num_philo)
-    {
-        data->philos[i - 1].id_philo = i;
-        data->philos[i - 1].last_meal= 0;
-        data->philos[i - 1].data = data;
-       // printf("%d\n", data->philos[i].id_philo);
+        data->philos[i].id_philo = i + 1;
+        data->philos[i].last_meal= get_current_time();
+        pthread_mutex_init(&data->philos[i].right_fork, NULL);
+        data->philos[i].left_fork = &data->philos[(i + 1) % data->num_philo].right_fork; // rule of next!!
+        data->philos[i].meals_eaten = 0;
+        data->philos[i].data = data;
+        // printf("%d\n", data->philos[i].id_philo);
         i++;
     }
     pthread_mutex_init(&data->print, NULL);
