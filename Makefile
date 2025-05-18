@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
 
 
-SRCS = philo.c helper.c init_data.c
+SRCS = philo.c helper.c init_data.c parssing.c
 
 OBJECTS = $(SRCS:.c=.o)
 

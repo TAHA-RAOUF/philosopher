@@ -6,7 +6,7 @@
 /*   By: moraouf <moraouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 14:15:50 by moraouf           #+#    #+#             */
-/*   Updated: 2025/05/18 15:12:00 by moraouf          ###   ########.fr       */
+/*   Updated: 2025/05/18 18:58:01 by moraouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ int main(int ac,char **av)
 {
     t_data data;
     
-    if(!check_data(av,ac))
-        return 1;
+    if(ft_parssing(av,ac) == 1)
+        return (1);
     memset(&data,'0',sizeof(t_data));
     //data = malloc(sizeof(t_data)); // replace with bzero HERE
     init_data(ac, av, &data);

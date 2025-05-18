@@ -6,7 +6,7 @@
 /*   By: moraouf <moraouf@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:12:03 by moraouf           #+#    #+#             */
-/*   Updated: 2025/05/18 15:13:19 by moraouf          ###   ########.fr       */
+/*   Updated: 2025/05/18 20:11:41 by moraouf          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void init_data(int ac,char **av,t_data *data)
     if(ac == 6)
         data->num_phi_eat = ft_atoi(av[5]);
     else
-        data->num_phi_eat = -1 ;
+        data->num_phi_eat = -1;
     data->philos = init_philo(data);
 }
 
